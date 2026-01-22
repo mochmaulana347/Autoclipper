@@ -1,23 +1,83 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-    <title>AI Auto-Clipper</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ClipMaster AI - Pro Auto Clipper</title>
+    <script src="https://cdn.tailwindcss.com"></script>
     <style>
-        body { background: #272343; color: white; font-family: sans-serif; text-align: center; padding: 50px; }
-        input { padding: 10px; width: 300px; border-radius: 5px; border: none; }
-        button { padding: 10px 20px; background: #ffd803; color: #272343; border: none; font-weight: bold; cursor: pointer; }
+        /* HappyHue Palette */
+        :root {
+            --bg: #f9f4ef;    /* Background cream halus */
+            --main: #fffffe;  /* Putih bersih */
+            --highlight: #8abdff; /* Biru langit */
+            --secondary: #e58e73; /* Coral pastel */
+            --tertiary: #fac5c5;  /* Pink soft */
+            --text: #020826;  /* Gelap elegan */
+        }
+        body { background-color: var(--bg); color: var(--text); }
+        .glass-card { background: var(--main); border: 2px solid var(--text); box-shadow: 4px 4px 0px var(--text); }
+        .btn-pro { background-color: var(--highlight); border: 2px solid var(--text); box-shadow: 3px 3px 0px var(--text); transition: 0.2s; }
+        .btn-pro:active { transform: translate(2px, 2px); box-shadow: 0px 0px 0px var(--text); }
     </style>
 </head>
-<body>
-    <h1>AI Auto-Clipper 🎬</h1>
-    <p>Ubah video horizontal jadi Shorts/Reels otomatis</p>
-    <input type="text" id="videoLink" placeholder="Paste link YouTube di sini...">
-    <button onclick="kirimRequest()">Buat Klip!</button>
+<body class="p-6 md:p-12">
+    <div class="max-w-2xl mx-auto glass-card p-8 rounded-xl">
+        <header class="mb-8 text-center">
+            <h1 class="text-4xl font-black italic">CLIPMASTER AI 🎬</h1>
+            <p class="opacity-70 font-medium">Bikin konten viral dari video panjang dalam sekejap.</p>
+        </header>
+
+        <div class="mb-6">
+            <label class="block font-bold mb-2">1. Masukkan Link Video</label>
+            <input type="text" id="vLink" placeholder="https://youtube.com/watch?v=..." 
+                   class="w-full p-4 rounded-lg border-2 border-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-400">
+        </div>
+
+        <div class="mb-6">
+            <label class="block font-bold mb-2">2. Instruksi Khusus AI (Manual Prompt)</label>
+            <textarea id="aiPrompt" rows="3" 
+                      class="w-full p-4 rounded-lg border-2 border-slate-900 focus:outline-none" 
+                      placeholder="Contoh: Ambil bagian pas dia marah-marah, kasih caption warna kuning terang..."></textarea>
+        </div>
+
+        <div class="grid grid-cols-2 gap-4 mb-8">
+            <div>
+                <label class="block font-bold mb-2">Durasi Klip</label>
+                <select id="duration" class="w-full p-3 rounded-lg border-2 border-slate-900">
+                    <option value="15">15 Detik (Shorts)</option>
+                    <option value="30">30 Detik (Reels)</option>
+                    <option value="60">60 Detik (TikTok)</option>
+                </select>
+            </div>
+            <div>
+                <label class="block font-bold mb-2">Gaya Caption</label>
+                <select id="style" class="w-full p-3 rounded-lg border-2 border-slate-900">
+                    <option value="hormozi">Alex Hormozi Style</option>
+                    <option value="minimalist">Minimalist White</option>
+                </select>
+            </div>
+        </div>
+
+        <button onclick="prosesProject()" class="btn-pro w-full py-4 text-xl font-black uppercase tracking-widest">
+            PROSES VIDEO SEKARANG 🚀
+        </button>
+
+        <div id="loader" class="hidden mt-8 p-6 bg-slate-100 border-dashed border-2 border-slate-400 rounded-lg text-center">
+            <div class="animate-bounce text-3xl mb-2">⚙️</div>
+            <p class="font-bold">Server GitHub lagi kerja keras...</p>
+            <p class="text-sm opacity-60">Estimasi selesai: 2-5 menit. Cek tab "Download" nanti.</p>
+        </div>
+    </div>
+
+    <footer class="mt-12 text-center opacity-40 font-bold">
+        MADE WITH ❤️ BY [NAMA KAMU]
+    </footer>
 
     <script>
-        function kirimRequest() {
-            alert("Permintaan dikirim ke Mesin GitHub! Cek hasilnya beberapa menit lagi.");
-            // Logika ini nanti akan memicu GitHub Actions melalui Repository Dispatch
+        function prosesProject() {
+            document.getElementById('loader').classList.remove('hidden');
+            // Logika integrasi GitHub API diletakkan di sini
         }
     </script>
 </body>
