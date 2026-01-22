@@ -1,0 +1,26 @@
+# Simpan di folder: .github/workflows/main.yml
+name: Jalankan Auto Clipper
+on:
+  repository_dispatch:
+    types: [mulai-clip]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Install FFmpeg & Python
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y ffmpeg
+          pip install yt-dlp
+
+      - name: Eksekusi Script Clipper
+        run: python scripts/autoclip.py ${{ github.event.client_payload.url }}
+
+      - name: Upload Hasil ke Cloud
+        uses: actions/upload-artifact@v3
+        with:
+          name: video-hasil-reels
+          path: output_reels.mp4
